@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #account {
+      margin-bottom: 5px;
+    }
+
+    span {
+      margin-right: 5px;
+    }
+
+    #password {
+      margin-bottom: 10px;
+    }
+  </style>
+  <script src="../lib/axios.js"></script>
+</head>
+
+<body>
+  <div id="account"><span>账号</span><input type="text" class="account"></div>
+  <div id="password"><span>密码</span><input type="password" class="password"></div>
+  <button id="login">登录</button>
+  <button id="derive">导出</button>
+</body>
+
+</html>
+
+<script>
+  const derive = document.querySelector('#derive')
+  const login = document.querySelector('#login')
+  const account = document.querySelector('.account')
+  const password1 = document.querySelector('.password')
+
+  const http = axios.create({
+    baseURL: 'http://localhost:8000',
+    timeout: 5000
+  })
+
+  // 定义下载Excel表格的函数
+  async function downloadExcel() {
+    const response = await http.get('/finance/derive', { responseType: 'blob' })
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'example.xlsx')
+    document.body.appendChild(link)
+    link.click()
+  }
+
+  function loginFun() {
+    console.log(account.value)
+    console.log(password1.value)
+    let user_name = account.value
+    let password = password1.value
+    let data = {
+      user_name,
+      password
+    }
+    http({
+      url: '/users/login',
+      method: 'post',
+      data: data
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  login.addEventListener('click', loginFun)
+  derive.addEventListener('click', downloadExcel)
+  // 在按钮上绑定下载Excel表格的事件
+  // const downloadBtn = document.getElementById('download-btn')
+  // downloadBtn.addEventListener('click', downloadExcel)
+
+</script>

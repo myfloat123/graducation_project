@@ -1,0 +1,22 @@
+# comment
+Title: This is a title
+
+# 同步调用
+A->B: Hello
+
+# 异步调用  
+A->>B: Hello
+
+# 回复消息
+A-->B: Hello
+
+# 笔记
+Note left of A: Left note
+Note right of A: right note
+Note over A: over note
+Note over A,B: over both A and B
+
+# 重新排序，提前声明顺序，会覆盖后续语法的顺序
+participant B
+participant A
+A->B: Hello

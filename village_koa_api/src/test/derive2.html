@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/axios.js"></script>
+</head>
+
+<body>
+  <button id="derive">导出</button>
+</body>
+
+</html>
+
+<script>
+  const derive = document.querySelector('#derive')
+
+  const http = axios.create({
+    baseURL: 'http://localhost:3000',
+    timeout: 5000
+  })
+
+  // 定义下载Excel表格的函数
+  async function downloadExcel() {
+    const response = await http.get('/export-excel', { responseType: 'blob' })
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'example.xlsx')
+    document.body.appendChild(link)
+    link.click()
+  }
+  derive.addEventListener('click', downloadExcel)
+  // 在按钮上绑定下载Excel表格的事件
+  // const downloadBtn = document.getElementById('download-btn')
+  // downloadBtn.addEventListener('click', downloadExcel)
+
+</script>

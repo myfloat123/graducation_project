@@ -1,0 +1,8 @@
+{
+  signal:[
+    {name:"CLK",wave:"p........",period:2},
+    {name:"CLK_Mul",wave:"p........",period:1},
+    {name:"CLK_Mul_Inv",wave:"p........",period:1, phase:0.5},
+    {name:"CLK_90",wave:"p........",period:1, phase:-0.5},
+  ]
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/jquery.js"></script>
+</head>
+
+<body>
+  <form id="userForm">
+    <span>用户名：</span><input type="text" id="uname" name="uname1">
+    <span>密码：</span><input type="password" id="pwd" name="pwd1">
+    <button id="login" type="submit">登录</button>
+  </form>
+  <button id="btnUser">获取用户信息</button>
+</body>
+
+</html>
+<script>
+  $(
+    function () {
+      $('#btnUser').on('click', function () {
+        $.ajax({
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('test_user_token') || ''}`
+          },
+          url: 'http://localhost:8000/users/',
+          method: 'get',
+          success: function (res) {
+            console.log(res)
+          },
+          error: function (err) {
+            console.log(err)
+          }
+        })
+      })
+
+      $('#userForm').on('submit', function (e) {
+        e.preventDefault()
+
+        let data = $('#userForm').serialize()
+        console.log(data)
+        let arr = []
+        arr = data.replace('&', '=').split('=')
+        console.log(arr)
+        $.ajax({
+          url: 'http://localhost:8000/users/login',
+          method: 'post',
+          data: {
+            user_name: arr[1],
+            password: arr[3]
+          },
+          success: function (res) {
+            console.log(res)
+            localStorage.setItem('test_user_token', res.result.token)
+          },
+          error: function (err) {
+            console.log(err)
+          }
+        })
+      })
+    }
+  )
+</script>

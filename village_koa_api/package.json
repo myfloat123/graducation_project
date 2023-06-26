@@ -1,0 +1,49 @@
+{
+  "name": "village_koa_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "_moduleAliases": {
+    "@": "./src",
+    "@utils": "./src/utils",
+    "@config": "./src/config",
+    "@modules": "./src/modules",
+    "@libs": "./src/libs",
+    "@db": "./src/db"
+  },
+  "scripts": {
+    "dev": "nodemon ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "exceljs": "^4.3.0",
+    "js-cookie": "^3.0.1",
+    "js-sequence-diagrams": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.0",
+    "koa": "^2.14.1",
+    "koa-body": "^6.0.1",
+    "koa-bodyparser": "^4.4.0",
+    "koa-parameter": "^3.0.1",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "koa-static-cache": "^5.1.4",
+    "koa2-formidable": "^1.0.3",
+    "mockjs": "^1.1.0",
+    "mysql2": "^3.1.2",
+    "node-xlsx": "^0.21.2",
+    "rd": "^2.0.1",
+    "sequelize": "^6.28.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
